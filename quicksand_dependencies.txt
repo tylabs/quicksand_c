@@ -1,0 +1,48 @@
+MacOS:
+
+Using brew (brew.sh):
+brew install yara libzip zlib
+
+
+Centos:
+yum install automake libtool wget libzip libzip-devel zlib zlib-devel libssl-devel
+
+cd ~/Desktop
+wget https://github.com/VirusTotal/yara/archive/v3.8.1.tar.gz
+gunzip v3.8.1.tar.gz
+tar -xvf v3.8.1.tar
+cd yara-3.8.1
+chmod 777 ./build.sh
+LD_LIBRARY_PATH=/usr/local/lib
+export LD_LIBRARY_PATH
+LDFLAGS=-L/usr/local/opt/openssl/lib
+export LDFLAGS
+CPPFLAGS=-I/usr/local/opt/openssl/include
+export CPPFLAGS
+./build.sh
+sudo make install
+
+
+Optional:
+
+cd ..
+wget https://nih.at/libzip/libzip-1.5.1.tar.gz
+gunzip libzip-1.5.1.tar.gz
+tar -xvf libzip-1.5.1.tar
+cd libzip-1.5.1
+./configure
+make
+sudo make install
+sudo ln -vs  /usr/local/lib/libzip/include/zipconf.h /usr/local/include
+
+
+cd ..
+wget http://zlib.net/zlib-1.2.11.tar.gz
+gunzip zlib-1.2.11.tar.gz
+tar -xvf zlib-1.2.11.tar
+cd zlib-1.2.11
+./configure
+make
+sudo make install
+
+
